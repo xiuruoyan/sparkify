@@ -1,36 +1,34 @@
 # Sparkify
 Udacity Datascience Nano Degree Capstone Project
-Pyspark code that explores and cleans a large dataset, engineers features and labels, and trains a model to predict which "Sparkify" music service users are likely to cancel their subscriptions.
 
-The code was developed with a Jupyter Notebook on the Apache Spark framework running on an AWS cluster.
+This project is to predict if Sparkify users are likely to cansel their subscriptions. The code was developed with Jupyter Notebook on the Spark framework running on an IBM cluster. And the process is data exploring, data engineering and model building.
 
 ## Motivation
-The overall purpose of the project is to use the Apache Spark framework on an AWS cluster for training a machine learning model with a large dataset. The goal I hoped to accomplish while learing Spark, was to develop an accurate model for predicting when a "Sparkify" user is likely to churn.
+Based on Sparkify data, we can see users' behavior. The purpose is to use these event data to develop an accurate machine learning model predicting whether a "Sparkify" user is likely to churn.
 
 ## Blog Post
-The full discussion of my project and code are in this blog post on Medium
+The full discussion of my project and code are in this blog post.
 
 ## What's Inside
-Sparkify_local.html : Jupyter Notebook with code running on my local machine with a small subset of the total dataset. This code was used to explore and clean the data and tryout engineering the features before moving to the AWS cluster.
+Sparkify_local.ipynb: original Jupyter Notebook code running on local machine with a small subset of the whole dataset. It's used to explore and clean data and try some feature engineering before using IBM working on the large data set.  
+Sparkify_local.html: the html type of Sparkify_local.ipynb.  
 
-Sparkify_cloud.html: Jupyter Notebook with code for running on the IBM cluster. Much of the initial code from the Sparkify-Local notebook ws copied here once I had it running locally on the smaller dataset. Additionally, this notebook splits the full dataset into train, validation, and test data; trains the model and evaluates the accuracy of the model.
+Sparkify_cloud.ipynb: original Jupyter Notebook code running on IBM cluster. Data exploring part were done in local machine. In addition, this code splits the total dataset into train and test data; train machine learning models; choose and tune models and evaluate accuracy.  
+Sparkify_cloud.html: the html type of Sparkify_cloud.ipynb.  
 
 ## Credits
-I relied on three main references during this project:
-
-https://spark.apache.org/docs/2.1.1/ml-classification-regression.html . 
-https://medium.com/@kennyflutes/using-apache-spark-to-predict-user-churn-c4a50a2520e8 
-Susan Li's blog post on Machine Learning with PySpark
-Chang Hsin Lee's blog post on turning python functions into PySpark
+I relied on two main references during this project:  
+https://spark.apache.org/docs/2.1.1/ml-classification-regression.html   
+https://medium.com/@kennyflutes/using-apache-spark-to-predict-user-churn-c4a50a2520e8  
 
 ## Libraries Used
-pyspark.sql.SparkSession
-pyspark.sql.functions
-pyspark.sql.types
-pyspark.ml.feature: VectorAssembler, StandardScaler
-pyspark.storagelevel
-pyspark.ml.classification.LogisticRegression
-pyspark.ml.evaluation.BinaryClassificationEvaluator
-pyspark.ml.tuning: CrossValidator, ParamGridBuilder
-pandas
-matplotlib
+pyspark.sql.SparkSession  
+pyspark.sql.functions  
+pyspark.sql.types  
+pyspark.ml.feature: VectorAssembler, StandardScaler  
+pyspark.ml.classification.LogisticRegression, GBTClassifier 
+pyspark.ml.evaluation.MulticlassClassificationEvaluator 
+pyspark.ml.tuning.CrossValidator, ParamGridBuilder 
+pandas  
+numpy 
+matplotlib 
