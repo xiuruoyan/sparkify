@@ -7,7 +7,7 @@ This project is to predict if Sparkify users are likely to cansel their subscrip
 Based on Sparkify data, we can see users' behavior. The purpose is to use these event data to develop an accurate machine learning model predicting whether a "Sparkify" user is likely to churn.
 
 ## Blog Post
-The full discussion of my project and code are in this blog post.
+The full discussion of my project and code are in this blog post.https://www.weibo.com/ttarticle/p/show?id=2309404442377761718295
 
 ## What's Inside
 Sparkify_local.ipynb: original Jupyter Notebook code running on local machine with a small subset of the whole dataset. It's used to explore and clean data and try some feature engineering before using IBM working on the large data set.  
