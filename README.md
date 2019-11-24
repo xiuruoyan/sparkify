@@ -18,7 +18,8 @@ Sparkify_cloud.html: Jupyter Notebook with code for running on the IBM cluster. 
 ## Credits
 I relied on three main references during this project:
 
-https://spark.apache.org/docs/2.1.1/ml-classification-regression.html
+https://spark.apache.org/docs/2.1.1/ml-classification-regression.html . 
+https://medium.com/@kennyflutes/using-apache-spark-to-predict-user-churn-c4a50a2520e8 
 Susan Li's blog post on Machine Learning with PySpark
 Chang Hsin Lee's blog post on turning python functions into PySpark
 
