@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Sparky</title>
+<title>Sparkify_cloud</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -14010,9 +14010,22 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overview">Overview<a class="anchor-link" href="#Overview">&#182;</a></h2><p>Sparkify is a music streaming service just as Spotify and Apple music.</p>
+<p>The data provided is the user event of the service, including user info, user activities, timestamps and etc. I try to analyze the event and build a model to identify customers who are highly likely to unsubscribe Sparkify. It is a classfication problem.</p>
+<p>I used F1 score to measure of model performance as we need both precision and recall rate. We don't want to miss customers who are likely to churn while we don't want to waste too much time on bring back those who are not likely to churn.</p>
+<p>The process of the project is cleaning data, exploring data, feature engineering, training several machine learning classification models and getting the final results.</p>
+<h2 id="Load-and-Clean-Dataset">Load and Clean Dataset<a class="anchor-link" href="#Load-and-Clean-Dataset">&#182;</a></h2><p>In this workspace, the filename is medium-sparkify-event-data.json.</p>
+<p>The chunk below is the starter code for using IBM-Watson cloud. I've already anonymized the credentials and config. IBM-Watson cloud will automatically generate this chunk of code once you upload your data from local.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">ibmos2spark</span>
@@ -14047,20 +14060,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Waiting for a Spark session to start...
-Spark Initialization Done! ApplicationId = app-20191124183125-0001
-KERNEL_ID = f41a8a73-30b2-402c-babf-6001c347b1b7
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[1]:</div>
+    <div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -14081,7 +14081,7 @@ KERNEL_ID = f41a8a73-30b2-402c-babf-6001c347b1b7
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import libraries</span>
@@ -14113,7 +14113,7 @@ KERNEL_ID = f41a8a73-30b2-402c-babf-6001c347b1b7
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
@@ -14129,7 +14129,7 @@ KERNEL_ID = f41a8a73-30b2-402c-babf-6001c347b1b7
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[3]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -14163,7 +14163,40 @@ KERNEL_ID = f41a8a73-30b2-402c-babf-6001c347b1b7
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Row(artist=&#39;Martin Orford&#39;, auth=&#39;Logged In&#39;, firstName=&#39;Joseph&#39;, gender=&#39;M&#39;, itemInSession=20, lastName=&#39;Morales&#39;, length=597.55057, level=&#39;free&#39;, location=&#39;Corpus Christi, TX&#39;, method=&#39;PUT&#39;, page=&#39;NextSong&#39;, registration=1532063507000, sessionId=292, song=&#39;Grand Designs&#39;, status=200, ts=1538352011000, userAgent=&#39;&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36&#34;&#39;, userId=&#39;293&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -14179,7 +14212,7 @@ KERNEL_ID = f41a8a73-30b2-402c-babf-6001c347b1b7
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[4]:</div>
+    <div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -14196,7 +14229,7 @@ KERNEL_ID = f41a8a73-30b2-402c-babf-6001c347b1b7
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -14235,7 +14268,7 @@ KERNEL_ID = f41a8a73-30b2-402c-babf-6001c347b1b7
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;level&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -14272,7 +14305,7 @@ KERNEL_ID = f41a8a73-30b2-402c-babf-6001c347b1b7
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -14309,7 +14342,7 @@ KERNEL_ID = f41a8a73-30b2-402c-babf-6001c347b1b7
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -14347,7 +14380,7 @@ KERNEL_ID = f41a8a73-30b2-402c-babf-6001c347b1b7
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -14403,7 +14436,7 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># select fields</span>
@@ -14433,7 +14466,7 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_churn</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">collect_list</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;auths&quot;</span><span class="p">))</span>
@@ -14449,7 +14482,7 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_label</span> <span class="o">=</span> <span class="n">df_churn</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_clean</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
@@ -14466,14 +14499,14 @@ only showing top 20 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[12]:</div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[Row(Churned=&#39;false&#39;, avg(length)=248.5848635245238),
- Row(Churned=&#39;true&#39;, avg(length)=248.99398360601683)]</pre>
+<pre>[Row(Churned=&#39;false&#39;, avg(length)=248.58486352452374),
+ Row(Churned=&#39;true&#39;, avg(length)=248.9939836060168)]</pre>
 </div>
 
 </div>
@@ -14484,7 +14517,7 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_label</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span><span class="s2">&quot;Churned&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
@@ -14500,7 +14533,7 @@ only showing top 20 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[13]:</div>
+    <div class="prompt output_prompt">Out[16]:</div>
 
 
 
@@ -14517,7 +14550,7 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_label</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span><span class="s2">&quot;Churned&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -14533,7 +14566,7 @@ only showing top 20 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[14]:</div>
+    <div class="prompt output_prompt">Out[17]:</div>
 
 
 
@@ -14612,7 +14645,7 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">songsPlayed</span> <span class="o">=</span> <span class="n">df_label</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;song&#39;</span><span class="p">)</span><span class="o">!=</span><span class="s1">&#39;null&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;song&#39;</span><span class="p">))</span>\
@@ -14626,7 +14659,47 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">songsPlayed</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>+-------+-----------------+------------------+
+|summary|           userId|       SongsPlayed|
++-------+-----------------+------------------+
+|  count|              448|               448|
+|   mean|67520.34821428571| 966.2433035714286|
+| stddev|105964.5842848519|1150.8277640292881|
+|    min|               10|                 1|
+|    max|               99|              8177|
++-------+-----------------+------------------+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span> <span class="o">=</span> <span class="n">df_churn</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">songsPlayed</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
@@ -14639,96 +14712,10 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;SongsPlayed&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[18]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[Row(Churned=&#39;false&#39;, avg(SongsPlayed)=998.6189111747851),
- Row(Churned=&#39;true&#39;, avg(SongsPlayed)=852.1111111111111)]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">thumbsUp</span> <span class="o">=</span> <span class="n">df_label</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_label</span><span class="o">.</span><span class="n">page</span><span class="o">==</span><span class="s1">&#39;Thumbs Up&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;ThumbsUp&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">thumbsDown</span> <span class="o">=</span> <span class="n">df_label</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_label</span><span class="o">.</span><span class="n">page</span><span class="o">==</span><span class="s1">&#39;Thumbs Down&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;ThumbsDown&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">allThumbs</span> <span class="o">=</span> <span class="n">thumbsUp</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">thumbsDown</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">allThumbs</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;ThumbsUp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">columns</span>
 </pre></div>
 
     </div>
@@ -14741,78 +14728,17 @@ only showing top 20 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[23]:</div>
+    <div class="prompt output_prompt">Out[22]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[Row(Churned=&#39;false&#39;, avg(ThumbsUp)=64.52842809364549),
- Row(Churned=&#39;true&#39;, avg(ThumbsUp)=47.8876404494382)]</pre>
+<pre>[&#39;userId&#39;, &#39;Churned&#39;, &#39;SongsPlayed&#39;]</pre>
 </div>
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;ThumbsDown&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[24]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[Row(Churned=&#39;false&#39;, avg(ThumbsDown)=12.551839464882944),
- Row(Churned=&#39;true&#39;, avg(ThumbsDown)=12.98876404494382)]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">days</span> <span class="o">=</span> <span class="n">df_label</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(((</span><span class="nb">max</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;ts&#39;</span><span class="p">))</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;ts&#39;</span><span class="p">)))</span><span class="o">/</span><span class="mi">86400</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;Days&quot;</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">days</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
@@ -14822,7 +14748,7 @@ only showing top 20 rows
 <div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;Days&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;SongsPlayed&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14841,8 +14767,8 @@ only showing top 20 rows
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[Row(Churned=&#39;false&#39;, avg(Days)=49699.798556918126),
- Row(Churned=&#39;true&#39;, avg(Days)=27767.299469413225)]</pre>
+<pre>[Row(Churned=&#39;false&#39;, avg(SongsPlayed)=998.6189111747851),
+ Row(Churned=&#39;true&#39;, avg(SongsPlayed)=852.1111111111111)]</pre>
 </div>
 
 </div>
@@ -14856,7 +14782,7 @@ only showing top 20 rows
 <div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">SongAddedToPlaylist</span> <span class="o">=</span> <span class="n">df_label</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">)</span><span class="o">!=</span><span class="s1">&#39;Add to Playlist&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;SongAddedToPlaylist&#39;</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">thumbsUp</span> <span class="o">=</span> <span class="n">df_label</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_label</span><span class="o">.</span><span class="n">page</span><span class="o">==</span><span class="s1">&#39;Thumbs Up&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;ThumbsUp&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14869,7 +14795,7 @@ only showing top 20 rows
 <div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SongAddedToPlaylist</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">thumbsDown</span> <span class="o">=</span> <span class="n">df_label</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_label</span><span class="o">.</span><span class="n">page</span><span class="o">==</span><span class="s1">&#39;Thumbs Down&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;ThumbsDown&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14882,7 +14808,20 @@ only showing top 20 rows
 <div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;SongAddedToPlaylist&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">allThumbs</span> <span class="o">=</span> <span class="n">thumbsUp</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">thumbsDown</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">allThumbs</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14895,31 +14834,24 @@ only showing top 20 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[30]:</div>
+    <div class="prompt"></div>
 
 
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>+-------+------------------+-----------------+------------------+
+|summary|            userId|         ThumbsUp|        ThumbsDown|
++-------+------------------+-----------------+------------------+
+|  count|               388|              388|               388|
+|   mean| 69696.13917525773|60.71134020618557|12.652061855670103|
+| stddev|106829.03164214377|71.95260552701934|13.589214102508379|
+|    min|                10|                1|                 1|
+|    max|                99|              506|                80|
++-------+------------------+-----------------+------------------+
 
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[Row(Churned=&#39;false&#39;, avg(SongAddedToPlaylist)=1368.103678929766),
- Row(Churned=&#39;true&#39;, avg(SongAddedToPlaylist)=1127.258426966292)]</pre>
+</pre>
+</div>
 </div>
 
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">FreindAdded</span> <span class="o">=</span> <span class="n">df_label</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">)</span><span class="o">!=</span><span class="s1">&#39;Add Friend&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;FreindAdded&#39;</span><span class="p">))</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
@@ -14929,7 +14861,7 @@ only showing top 20 rows
 <div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FreindAdded</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">allThumbs</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14942,7 +14874,7 @@ only showing top 20 rows
 <div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;FreindAdded&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;ThumbsUp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14961,8 +14893,8 @@ only showing top 20 rows
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[Row(Churned=&#39;false&#39;, avg(FreindAdded)=1379.9030100334448),
- Row(Churned=&#39;true&#39;, avg(FreindAdded)=1135.3258426966293)]</pre>
+<pre>[Row(Churned=&#39;false&#39;, avg(ThumbsUp)=64.52842809364549),
+ Row(Churned=&#39;true&#39;, avg(ThumbsUp)=47.8876404494382)]</pre>
 </div>
 
 </div>
@@ -14976,7 +14908,7 @@ only showing top 20 rows
 <div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;ThumbsDown&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14995,7 +14927,8 @@ only showing top 20 rows
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[Row(userId=&#39;100010&#39;, Churned=&#39;true&#39;, SongsPlayed=96, ThumbsUp=4, ThumbsDown=3, Days=3043.125, SongAddedToPlaylist=136, FreindAdded=134)]</pre>
+<pre>[Row(Churned=&#39;false&#39;, avg(ThumbsDown)=12.551839464882944),
+ Row(Churned=&#39;true&#39;, avg(ThumbsDown)=12.98876404494382)]</pre>
 </div>
 
 </div>
@@ -15009,8 +14942,347 @@ only showing top 20 rows
 <div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Vectorize and scale features</span>
-<span class="n">assembler</span> <span class="o">=</span> <span class="n">VectorAssembler</span><span class="p">(</span><span class="n">inputCols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SongsPlayed&quot;</span><span class="p">,</span> <span class="s2">&quot;ThumbsUp&quot;</span><span class="p">,</span> <span class="s2">&quot;ThumbsDown&quot;</span><span class="p">,</span> <span class="s2">&quot;Days&quot;</span><span class="p">,</span> <span class="s2">&quot;SongAddedToPlaylist&quot;</span><span class="p">,</span> <span class="s2">&quot;FreindAdded&quot;</span><span class="p">],</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">days</span> <span class="o">=</span> <span class="n">df_label</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(((</span><span class="nb">max</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;ts&#39;</span><span class="p">))</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;ts&#39;</span><span class="p">)))</span><span class="o">/</span><span class="mi">86400</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;Days&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">days</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>+-------+------------------+------------------+
+|summary|            userId|              Days|
++-------+------------------+------------------+
+|  count|               449|               449|
+|   mean| 67520.34821428571| 41528.26254846162|
+| stddev|105964.58428485185|18738.278832537766|
+|    min|                  | 9.143518518518519|
+|    max|                99| 60998.59953703704|
++-------+------------------+------------------+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">days</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;Days&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[38]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[Row(Churned=&#39;false&#39;, avg(Days)=49699.79855691813),
+ Row(Churned=&#39;true&#39;, avg(Days)=27767.299469413236)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">SongAddedToPlaylist</span> <span class="o">=</span> <span class="n">df_label</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">)</span><span class="o">!=</span><span class="s1">&#39;Add to Playlist&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;SongAddedToPlaylist&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">SongAddedToPlaylist</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>+-------+-----------------+-------------------+
+|summary|           userId|SongAddedToPlaylist|
++-------+-----------------+-------------------+
+|  count|              449|                449|
+|   mean|67520.34821428571| 1183.4209354120267|
+| stddev|105964.5842848519|  1510.918303315196|
+|    min|                 |                  3|
+|    max|               99|              15700|
++-------+-----------------+-------------------+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SongAddedToPlaylist</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;SongAddedToPlaylist&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[43]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[Row(Churned=&#39;false&#39;, avg(SongAddedToPlaylist)=1368.103678929766),
+ Row(Churned=&#39;true&#39;, avg(SongAddedToPlaylist)=1127.258426966292)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">FreindAdded</span> <span class="o">=</span> <span class="n">df_label</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">)</span><span class="o">!=</span><span class="s1">&#39;Add Friend&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;FreindAdded&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">FreindAdded</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>+-------+------------------+------------------+
+|summary|            userId|       FreindAdded|
++-------+------------------+------------------+
+|  count|               449|               449|
+|   mean| 67520.34821428571| 1192.913140311804|
+| stddev|105964.58428485187|1521.3431063863488|
+|    min|                  |                 3|
+|    max|                99|             15700|
++-------+------------------+------------------+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FreindAdded</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;FreindAdded&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[47]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[Row(Churned=&#39;false&#39;, avg(FreindAdded)=1379.9030100334448),
+ Row(Churned=&#39;true&#39;, avg(FreindAdded)=1135.3258426966293)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_features</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[48]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[Row(userId=&#39;100010&#39;, Churned=&#39;true&#39;, SongsPlayed=96, ThumbsUp=4, ThumbsDown=3, Days=3043.125, SongAddedToPlaylist=136, FreindAdded=134)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Vectorize-and-scale-features">Vectorize and scale features<a class="anchor-link" href="#Vectorize-and-scale-features">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">assembler</span> <span class="o">=</span> <span class="n">VectorAssembler</span><span class="p">(</span><span class="n">inputCols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SongsPlayed&quot;</span><span class="p">,</span> <span class="s2">&quot;ThumbsUp&quot;</span><span class="p">,</span> <span class="s2">&quot;ThumbsDown&quot;</span><span class="p">,</span> <span class="s2">&quot;Days&quot;</span><span class="p">,</span> <span class="s2">&quot;SongAddedToPlaylist&quot;</span><span class="p">,</span> <span class="s2">&quot;FreindAdded&quot;</span><span class="p">],</span> 
                             <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;FeatureVector&quot;</span><span class="p">)</span>
 <span class="n">df_features</span> <span class="o">=</span> <span class="n">assembler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_features</span><span class="p">)</span>
 </pre></div>
@@ -15034,6 +15306,15 @@ only showing top 20 rows
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Building-Model">Building Model<a class="anchor-link" href="#Building-Model">&#182;</a></h2><p>I used F1 score to measure of model performance as we need both precision and recall rate. We don't want to miss customers who are likely to churn while we don't want to waste too much time on bring back those who are not likely to churn.</p>
+<p>Used cross validation, grid search and chose different hyperparameters to train models, in order to avoid overfitting and find the best model.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -15221,13 +15502,14 @@ only showing top 20 rows
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h4><p>Among models above:</p>
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2><p>Among models above:</p>
 <p>logistic regression (best f1 score 0.85)
 graident boosted tree (best f1 score 0.83)</p>
 <p>So we choose logistic regression model with tunned parameter reg=0.01).</p>
 <p>Score on the final test set</p>
 <p>Accuracy: 81%
 F1 Score: 0.81</p>
+<p>There's no overfitting. So my final model is logistic regression model with tunned parameter reg=0.01).</p>
 
 </div>
 </div>
@@ -15408,6 +15690,20 @@ F1 Score: 0.81</p>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h3><p>I used 6 features to build the model: FriendAdded, SongAddedToPlaylist, Days, ThumbsDown, ThumbsUp and SongsPlayed. I selected 2 models to compare: Logistic Regression and Gradiant Boosted Tree and chose logistic regression as my final model to predict the result. I used ross validation and grid search to fine tune my model. I achieved about 81% accuracy, and 0.81 F1 score. 
+Based on the absolute values of final model coefficients, the features that contribute the most are:<br>
+1.Average number of thumbs down song<br>
+2.Days a user using Sparkify.</p>
+<h3 id="Reflection">Reflection<a class="anchor-link" href="#Reflection">&#182;</a></h3><p>Spark is a fabulous platform to deal with a large dataset as a personal laptop may be unble to achieve the same result effiently.</p>
+<p>The most difficult thing I faced during the project is brainstroming the features that I can derived from the data I've got right now. Developing useful features is the first step to develope a good model and it could be the most important step. EDA helps to determine waht features we could used.</p>
+<h3 id="Improvement">Improvement<a class="anchor-link" href="#Improvement">&#182;</a></h3><p>There're still a lot of choices for feature engineering like Thumbs Down per played songs or Thumbs Up per played songs. We can try more in the future to find a better model. And the dataset is a static. In real world, it's more convenient if I can generate an automate pipeline for production, from data cleaning to model building.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
